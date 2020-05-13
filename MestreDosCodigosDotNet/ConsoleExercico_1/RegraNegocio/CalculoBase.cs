@@ -1,7 +1,7 @@
-﻿using ConsoleExercico_1.Interfaces;
+﻿using ConsoleExercicio_1.Interfaces;
 using System;
 
-namespace ConsoleExercico_1.RegraNegocio
+namespace ConsoleExercicio_1.RegraNegocio
 {
     public class CalculoBase : ICalculo
     {

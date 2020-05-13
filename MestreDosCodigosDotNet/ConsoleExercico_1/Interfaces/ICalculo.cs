@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleExercico_1.Interfaces
+namespace ConsoleExercicio_1.Interfaces
 {
     public interface ICalculo
     {

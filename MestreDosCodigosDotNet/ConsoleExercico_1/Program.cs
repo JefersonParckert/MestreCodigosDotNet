@@ -1,8 +1,8 @@
-﻿using ConsoleExercico_1.RegraNegocio;
-using ConsoleExercico_1.Uteis;
+﻿using ConsoleExercicio_1.RegraNegocio;
+using ConsoleExercicio_1.Uteis;
 using System;
 
-namespace ConsoleExercico_1
+namespace ConsoleExercicio_1
 {
     class Program
     {

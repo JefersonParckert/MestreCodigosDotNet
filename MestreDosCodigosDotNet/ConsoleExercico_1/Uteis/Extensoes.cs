@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleExercico_1.Uteis
+namespace ConsoleExercicio_1.Uteis
 {
     public static class Extensoes
     {

@@ -1,6 +1,6 @@
-﻿using ConsoleExercico_1.Interfaces;
+﻿using ConsoleExercicio_1.Interfaces;
 
-namespace ConsoleExercico_1.RegraNegocio
+namespace ConsoleExercicio_1.RegraNegocio
 {
     public class CalculoFactory
     {

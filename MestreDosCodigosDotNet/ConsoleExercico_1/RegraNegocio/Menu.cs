@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ConsoleExercico_1.RegraNegocio
+namespace ConsoleExercicio_1.RegraNegocio
 {
     public class Menu
     {
