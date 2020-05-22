@@ -1,7 +1,6 @@
 ﻿using ConsoleExercicio_7.Uteis;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ConsoleExercicio_7
 {
@@ -24,7 +23,7 @@ namespace ConsoleExercicio_7
             int somatoria = 0;
             foreach (int valor in listaInteiros)
             {
-                if (valor.IsPair())
+                if (valor.EhNumeroPar())
                     somatoria += valor;
             }
             return somatoria;

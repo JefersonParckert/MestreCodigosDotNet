@@ -16,7 +16,7 @@ namespace ConsoleExercicio_7.Uteis
             }
         }
 
-        public static bool IsPair(this int valor)
+        public static bool EhNumeroPar(this int valor)
         {
             return (valor % 2) == 0;
         }
