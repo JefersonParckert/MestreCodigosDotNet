@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleExercicio_4", "Conso
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleExercicio_5", "ConsoleExercicio_5\ConsoleExercicio_5.csproj", "{E342FD55-38CD-491D-ADA0-8C00D38D6FC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleExercicio_6", "ConsoleExercicio_6\ConsoleExercicio_6.csproj", "{FAE5694F-6300-414C-A095-0FC5CC3710C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleExercicio_6", "ConsoleExercicio_6\ConsoleExercicio_6.csproj", "{FAE5694F-6300-414C-A095-0FC5CC3710C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleExercicio_7", "ConsoleExercicio_7\ConsoleExercicio_7.csproj", "{862A4E10-9572-47F5-A700-2D473A130DB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleExercicio_7", "ConsoleExercicio_7\ConsoleExercicio_7.csproj", "{862A4E10-9572-47F5-A700-2D473A130DB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +64,7 @@ Global
 		{6A1A4ACC-A1A5-49D2-B3E5-39BD354C0AA2} = {917E90AC-F7F7-4BEE-A00E-DB429B1E6BFF}
 		{E342FD55-38CD-491D-ADA0-8C00D38D6FC1} = {917E90AC-F7F7-4BEE-A00E-DB429B1E6BFF}
 		{FAE5694F-6300-414C-A095-0FC5CC3710C3} = {917E90AC-F7F7-4BEE-A00E-DB429B1E6BFF}
+		{862A4E10-9572-47F5-A700-2D473A130DB6} = {917E90AC-F7F7-4BEE-A00E-DB429B1E6BFF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {18AAA1C8-5A36-4DB9-9BC8-AA1A49B0A303}
