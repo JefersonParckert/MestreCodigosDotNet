@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using static ExercicioPOO_3.Uteis.Tipos;
 
 namespace ExercicioPOO_3.Dominio
 {
@@ -9,20 +10,19 @@ namespace ExercicioPOO_3.Dominio
         public int NumeroConta { get; private set; }
         public double Saldo { get; private set; }
 
-        public ContaBancaria()
-        {
-            NumeroConta = 0;
-            Saldo = 0.0;
-        }
+        protected List<Transacao> _transacoes;
 
         public ContaBancaria(int numeroConta, double saldoInicial)
         {
+            _transacoes = new List<Transacao>();
             NumeroConta = numeroConta;
             Saldo = saldoInicial;
+
+            GravarTransacao(TipoTransacao.AberturaConta, saldoInicial, StatusTransacao.Sucesso);
         }
 
-        public abstract string Sacar(double valorSaque);
-        public abstract string Depositar(double valorDeposito);
+        public abstract void Sacar(double valorSaque);
+        public abstract void Depositar(double valorDeposito);
 
         protected virtual double SaldoAtual()
         {
@@ -41,36 +41,64 @@ namespace ExercicioPOO_3.Dominio
 
         public StatusTransacao DepositoValido(double valorDeposito)
         {
-            return (valorDeposito <= 0) 
+            return (valorDeposito <= 0)
                         ? StatusTransacao.ValorIncorreto 
                         : StatusTransacao.Sucesso;            
         }
 
-        public void AtualizarSaldo(double valorAtualizar)
+        public void RealizarTransacao(TipoTransacao tipoTransacao, double valorTransacao)
         {
-            Saldo += valorAtualizar;   
+            EfetuarCredito(tipoTransacao, valorTransacao);
+            EfetuarDebito(tipoTransacao, valorTransacao);
+
+            GravarTransacao(tipoTransacao, valorTransacao, StatusTransacao.Sucesso);
         }
 
-        public string PegarMensagemStatusTransacao(StatusTransacao status)
+        private void EfetuarCredito(TipoTransacao tipoTransacao, double valorTransacao)
         {
-            switch (status)
+            switch (tipoTransacao)
             {
-                case StatusTransacao.Sucesso:
-                    return "Transação Realizada com Sucesso!";
-                case StatusTransacao.SaldoInsuficiente:
-                    return "Saldo insuficiente!";
-                case StatusTransacao.ValorIncorreto:
-                    return "O Valor da transação deve ser maior que zero!";
-                default:
-                    return "Status desconhecido!";
+                case TipoTransacao.AberturaConta:
+                case TipoTransacao.Deposito:
+                    Saldo += valorTransacao;
+                    break;
+                default: 
+                    return;
             }
         }
 
-        public enum StatusTransacao 
-        { 
-            Sucesso,
-            SaldoInsuficiente,
-            ValorIncorreto
+        private void EfetuarDebito(TipoTransacao tipoTransacao, double valorTransacao)
+        {
+            switch (tipoTransacao)
+            {
+                case TipoTransacao.Saque:
+                case TipoTransacao.TaxaOperacao:
+                    Saldo -= valorTransacao;
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        protected void GravarTransacao(TipoTransacao tipoTransacao, double valorTransacao, StatusTransacao statusTransacao)
+        {
+            var transacao = new Transacao();
+            transacao.TipoTransacao = tipoTransacao;
+            transacao.ValorTransacao = valorTransacao;
+            transacao.SaldoAtual = Saldo;
+            transacao.StatusTransacao = statusTransacao;
+
+            _transacoes.Add(transacao);
+        }
+
+        protected void ImprimirExtrato()
+        {
+            if (!_transacoes.Any())
+                return;
+
+            Console.WriteLine("\n+++++  Extrato  +++++");
+            foreach (Transacao transacao in _transacoes)
+                Console.WriteLine(transacao.DadosTransacao());
         }
     }
 }

@@ -1,6 +1,10 @@
-﻿namespace ExercicioPOO_3.Dominio
+﻿using ExercicioPOO_3.Dominio.Interface;
+using System;
+using static ExercicioPOO_3.Uteis.Tipos;
+
+namespace ExercicioPOO_3.Dominio
 {
-    public class ContaCorrente : ContaBancaria
+    public class ContaCorrente : ContaBancaria, IImprimivel
     {
 
         public double TaxaOperacao { get; private set; }
@@ -11,29 +15,51 @@
             TaxaOperacao = taxaOperacao;
         }
 
-        public override string Depositar(double valorDeposito)
+        public override void Depositar(double valorDeposito)
         {
             var statusTransacao = DepositoValido(valorDeposito);
 
-            if (statusTransacao == StatusTransacao.Sucesso)
-                AtualizarSaldo(valorDeposito - TaxaOperacao);
+            if (statusTransacao != StatusTransacao.Sucesso)
+            {
+                GravarTransacao(TipoTransacao.Deposito, valorDeposito, statusTransacao);
+                return;
+            }
 
-            return PegarMensagemStatusTransacao(statusTransacao);
+            ExecutarMovimentacao(TipoTransacao.Deposito, valorDeposito);
         }
 
-        public override string Sacar(double valorSaque)
+        public override void Sacar(double valorSaque)
         {
             var statusTransacao = SaqueValido(valorSaque);
-            if (statusTransacao == StatusTransacao.Sucesso)
+            if (statusTransacao != StatusTransacao.Sucesso)
             {
-                var valorSaqueComTaxa = valorSaque + TaxaOperacao;
-
-                statusTransacao = SaqueValido(valorSaqueComTaxa);
-
-                if (statusTransacao == StatusTransacao.Sucesso)
-                    AtualizarSaldo(valorSaqueComTaxa * (-1));
+                GravarTransacao(TipoTransacao.Saque, valorSaque, statusTransacao);
+                return;
             }
-            return PegarMensagemStatusTransacao(statusTransacao);
+
+            var valorSaqueComTaxa = valorSaque + TaxaOperacao;
+            statusTransacao = SaqueValido(valorSaqueComTaxa);
+            if (statusTransacao != StatusTransacao.Sucesso)
+            {
+                GravarTransacao(TipoTransacao.Saque, valorSaque, statusTransacao);
+                return;
+            }
+
+            ExecutarMovimentacao(TipoTransacao.Saque, valorSaque);
+        }
+
+        private void ExecutarMovimentacao(TipoTransacao tipoTransacao, double valorMovimentacao)
+        {
+            RealizarTransacao(tipoTransacao, valorMovimentacao);
+            RealizarTransacao(TipoTransacao.TaxaOperacao, TaxaOperacao);
+        }
+
+        public void MostrarDados()
+        {
+            Console.WriteLine($"Numero Conta.: {base.NumeroConta}");
+            Console.WriteLine($"Saldo Atual.: {base.Saldo:C2}");
+            Console.WriteLine($"Taxa por operação.: {TaxaOperacao:C2}");
+            ImprimirExtrato();
         }
     }
 }
