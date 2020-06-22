@@ -36,7 +36,7 @@ namespace ExercicioPOO_4.Dominio
 
         private void NotificarControleNaoSincronizado()
         {
-            Console.WriteLine("O Controle remoto não está sincronizado com a TV");
+            Console.WriteLine("[CR] - O Controle remoto não está sincronizado com a TV");
         }
 
         public void AumentarVolume()
@@ -83,7 +83,7 @@ namespace ExercicioPOO_4.Dominio
                 return;
 
             _consultarDefinicoes(out int canal, out int volume);
-            Console.WriteLine($"[Controle] - Definições da TV, Volume.:{volume}, Canal.: {canal}");
+            Console.WriteLine($"[CR] - Definições da TV, Volume.:{volume}, Canal.: {canal}");
         }
     }
 }
