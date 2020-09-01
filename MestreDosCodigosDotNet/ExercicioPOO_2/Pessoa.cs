@@ -48,7 +48,7 @@ namespace ExercicioPOO_2
             }
             set
             {
-                if (value > DateTime.Now)
+                if (value.Date > DateTime.Now.Date)
                     throw new ArgumentOutOfRangeException("A Data de Nascimento deve ser menor que HOJE!");
 
                 _dataNascimento = value;
@@ -72,15 +72,15 @@ namespace ExercicioPOO_2
 
         public override string ToString()
         {
-            return $"Nome: {_nome}, {IdadePessoa()} ano(s) \nData Nascimento.: {_dataNascimento.ToShortDateString()} \nAltura.: {_altura:N2}";
+            return $"Nome: {_nome}, {PegarIdadePessoa(DateTime.Now)} ano(s) \nData Nascimento.: {_dataNascimento.ToShortDateString()} \nAltura.: {_altura:N2}";
         }
 
-        public int IdadePessoa() {
-            int idade = (DateTime.Now.Year - _dataNascimento.Year);
-            if (DateTime.Now.Month < _dataNascimento.Month)
+        public int PegarIdadePessoa(DateTime dataCorrente) {
+            int idade = (dataCorrente.Year - _dataNascimento.Year);
+            if (dataCorrente.Month < _dataNascimento.Month)
                 idade--;
 
-            if ((DateTime.Now.Month == _dataNascimento.Month) && (DateTime.Now.Day < _dataNascimento.Day))
+            if ((dataCorrente.Month == _dataNascimento.Month) && (dataCorrente.Day < _dataNascimento.Day))
                 idade--;
 
             return idade;
