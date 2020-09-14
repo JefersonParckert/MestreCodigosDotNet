@@ -6,13 +6,6 @@ namespace ExercicioPOO_1
     {
         static void Main(string[] args)
         {
-            /*
-             *
-                O que faz as interfaces IDisposable, IComparable, ICloneable e IEnumerable?
-                Existe herança múltipla (de classes) em C#?
-             *
-             */
-            
             Polimorfismo.Executar();
 
             Abstracao.Executar();
@@ -20,6 +13,14 @@ namespace ExercicioPOO_1
             Encapsulamento.ServirCafe();
 
             ClasseAbstrataXInterface.Executar();
+
+            ExemploIDisposable.Executar();
+
+            ExemploIComparable.Executar();
+
+            ExemploIEnumerable.Executar();
+
+            ExemploICloneable.Executar();
 
             Console.ReadKey();
         }
