@@ -7,15 +7,15 @@ namespace ExercicioPOO_3.Dominio
     public class ContaCorrente : ContaBancaria, IImprimivel
     {
 
-        public double TaxaOperacao { get; private set; }
+        public decimal TaxaOperacao { get; private set; }
 
-        public ContaCorrente(int numeroConta, double saldoInicial, double taxaOperacao)
+        public ContaCorrente(int numeroConta, decimal saldoInicial, decimal taxaOperacao)
             :base(numeroConta, saldoInicial)
         {
             TaxaOperacao = taxaOperacao;
         }
 
-        public override void Depositar(double valorDeposito)
+        public override void Depositar(decimal valorDeposito)
         {
             var statusTransacao = DepositoValido(valorDeposito);
 
@@ -28,7 +28,7 @@ namespace ExercicioPOO_3.Dominio
             ExecutarMovimentacao(TipoTransacao.Deposito, valorDeposito);
         }
 
-        public override void Sacar(double valorSaque)
+        public override void Sacar(decimal valorSaque)
         {
             var statusTransacao = SaqueValido(valorSaque);
             if (statusTransacao != StatusTransacao.Sucesso)
@@ -48,7 +48,7 @@ namespace ExercicioPOO_3.Dominio
             ExecutarMovimentacao(TipoTransacao.Saque, valorSaque);
         }
 
-        private void ExecutarMovimentacao(TipoTransacao tipoTransacao, double valorMovimentacao)
+        private void ExecutarMovimentacao(TipoTransacao tipoTransacao, decimal valorMovimentacao)
         {
             RealizarTransacao(tipoTransacao, valorMovimentacao);
             RealizarTransacao(TipoTransacao.TaxaOperacao, TaxaOperacao);

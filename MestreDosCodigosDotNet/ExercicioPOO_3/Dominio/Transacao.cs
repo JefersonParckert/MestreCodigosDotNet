@@ -2,11 +2,12 @@
 
 namespace ExercicioPOO_3.Dominio
 {
+
     public class Transacao
     {
         public TipoTransacao TipoTransacao { get; set; }
-        public double ValorTransacao { get; set; }
-        public double SaldoAtual { get; set; }
+        public decimal ValorTransacao { get; set; }
+        public decimal SaldoAtual { get; set; }
         public StatusTransacao StatusTransacao { get; set; }
 
 

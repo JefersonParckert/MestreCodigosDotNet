@@ -6,8 +6,8 @@ namespace ExercicioPOO_3_NUnitTests
 {
     public class ContaCorrenteTests
     {
-        private const Double SALDO_INICIAL = 100.0;
-        private const Double TAXA_OPERACAO = 0.33;
+        private const decimal SALDO_INICIAL = 100m;
+        private const decimal TAXA_OPERACAO = 0.33m;
         private const int NUMERO_CONTA = 1;
 
 
@@ -20,7 +20,7 @@ namespace ExercicioPOO_3_NUnitTests
         public void ContaCorrente_Sacar_DeveDecremetarSaldo()
         {
             // Arrange
-            var valorsaque = 90.0;
+            var valorsaque = 90m;
             var saldoAtualizado = Math.Round(SALDO_INICIAL - TAXA_OPERACAO - valorsaque, 2);
             var contaCorrente = PegarContaCorrente();
 
@@ -35,7 +35,7 @@ namespace ExercicioPOO_3_NUnitTests
         public void ContaCorrente_Sacar_NaoDeveDecremetarSaldo()
         {
             // Arrange
-            var valorsaque = 99.78;
+            var valorsaque = 99.78m;
             var contaCorrente = PegarContaCorrente();
 
             // Act
@@ -49,7 +49,7 @@ namespace ExercicioPOO_3_NUnitTests
         public void ContaCorrente_Depositar_DeveIncremetarSaldo()
         {
             // Arrange
-            var valorDeposito = 10;
+            var valorDeposito = 10m;
             var saldoAtualizado = SALDO_INICIAL - TAXA_OPERACAO + valorDeposito;
             var contaCorrente = PegarContaCorrente();
 
@@ -67,7 +67,7 @@ namespace ExercicioPOO_3_NUnitTests
             var contaCorrente = PegarContaCorrente();
 
             // Act
-            contaCorrente.Depositar(-1);
+            contaCorrente.Depositar(-1m);
 
             // Assert
             Assert.AreEqual(SALDO_INICIAL, contaCorrente.Saldo);

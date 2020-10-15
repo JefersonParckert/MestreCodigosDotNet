@@ -6,15 +6,15 @@ namespace ExercicioPOO_3.Dominio
 {
     public class ContaEspecial : ContaBancaria, IImprimivel
     {
-        public double LimiteEspecial { get; private set; }
+        public decimal LimiteEspecial { get; private set; }
 
-        public ContaEspecial(int numeroConta, double saldoInicial, double limiteEspecial) 
+        public ContaEspecial(int numeroConta, decimal saldoInicial, decimal limiteEspecial) 
             : base(numeroConta, saldoInicial)
         {
             LimiteEspecial = limiteEspecial;
         }
 
-        public override void Depositar(double valorDeposito)
+        public override void Depositar(decimal valorDeposito)
         {
             var statusTransacao = DepositoValido(valorDeposito);
 
@@ -27,7 +27,7 @@ namespace ExercicioPOO_3.Dominio
             RealizarTransacao(TipoTransacao.Deposito, valorDeposito);
         }
 
-        public override void Sacar(double valorSaque)
+        public override void Sacar(decimal valorSaque)
         {
             var statusTransacao = SaqueValido(valorSaque);
             if (statusTransacao != StatusTransacao.Sucesso)
@@ -39,7 +39,7 @@ namespace ExercicioPOO_3.Dominio
             RealizarTransacao(TipoTransacao.Saque, valorSaque);            
         }
 
-        protected override double SaldoAtual()
+        protected override decimal SaldoAtual()
         {
             return (base.SaldoAtual() + LimiteEspecial);
         }

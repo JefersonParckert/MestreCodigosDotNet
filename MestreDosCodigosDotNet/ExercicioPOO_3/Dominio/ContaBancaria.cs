@@ -8,11 +8,11 @@ namespace ExercicioPOO_3.Dominio
     public abstract class ContaBancaria
     {
         public int NumeroConta { get; private set; }
-        public double Saldo { get; private set; }
+        public decimal Saldo { get; private set; }
 
         protected List<Transacao> _transacoes;
 
-        public ContaBancaria(int numeroConta, double saldoInicial)
+        public ContaBancaria(int numeroConta, decimal saldoInicial)
         {
             _transacoes = new List<Transacao>();
             NumeroConta = numeroConta;
@@ -21,15 +21,15 @@ namespace ExercicioPOO_3.Dominio
             GravarTransacao(TipoTransacao.AberturaConta, saldoInicial, StatusTransacao.Sucesso);
         }
 
-        public abstract void Sacar(double valorSaque);
-        public abstract void Depositar(double valorDeposito);
+        public abstract void Sacar(decimal valorSaque);
+        public abstract void Depositar(decimal valorDeposito);
 
-        protected virtual double SaldoAtual()
+        protected virtual decimal SaldoAtual()
         {
             return Saldo;
         }
 
-        public StatusTransacao SaqueValido(double valorSaque)
+        public StatusTransacao SaqueValido(decimal valorSaque)
         {
             if (valorSaque <= 0)
                 return StatusTransacao.ValorIncorreto;
@@ -39,14 +39,14 @@ namespace ExercicioPOO_3.Dominio
                         : StatusTransacao.SaldoInsuficiente;
         }
 
-        public StatusTransacao DepositoValido(double valorDeposito)
+        public StatusTransacao DepositoValido(decimal valorDeposito)
         {
             return (valorDeposito <= 0)
                         ? StatusTransacao.ValorIncorreto 
                         : StatusTransacao.Sucesso;            
         }
 
-        public void RealizarTransacao(TipoTransacao tipoTransacao, double valorTransacao)
+        public void RealizarTransacao(TipoTransacao tipoTransacao, decimal valorTransacao)
         {
             EfetuarCredito(tipoTransacao, valorTransacao);
             EfetuarDebito(tipoTransacao, valorTransacao);
@@ -54,7 +54,7 @@ namespace ExercicioPOO_3.Dominio
             GravarTransacao(tipoTransacao, valorTransacao, StatusTransacao.Sucesso);
         }
 
-        private void EfetuarCredito(TipoTransacao tipoTransacao, double valorTransacao)
+        private void EfetuarCredito(TipoTransacao tipoTransacao, decimal valorTransacao)
         {
             switch (tipoTransacao)
             {
@@ -67,7 +67,7 @@ namespace ExercicioPOO_3.Dominio
             }
         }
 
-        private void EfetuarDebito(TipoTransacao tipoTransacao, double valorTransacao)
+        private void EfetuarDebito(TipoTransacao tipoTransacao, decimal valorTransacao)
         {
             switch (tipoTransacao)
             {
@@ -80,7 +80,7 @@ namespace ExercicioPOO_3.Dominio
             }
         }
 
-        protected void GravarTransacao(TipoTransacao tipoTransacao, double valorTransacao, StatusTransacao statusTransacao)
+        protected void GravarTransacao(TipoTransacao tipoTransacao, decimal valorTransacao, StatusTransacao statusTransacao)
         {
             var transacao = new Transacao();
             transacao.TipoTransacao = tipoTransacao;
